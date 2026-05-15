@@ -8,7 +8,7 @@ Raël Guelere Ronsani
 João Felipe Oliveira Duarte
 
 Sobre o Projeto:
-O aplicativo tem como objetivo apoiar mulheres no autocuidado e na identificação de situações que demandam avaliação médica, funcionando como uma ponte entre o usuário e a Unidade Básica de Saúde (UBS). O conteúdo pedagógico aborda temas como corrimento vaginal, cólicas, ciclo menstrual, prevenção e rastreio (Papanicolau e mamografia), climatério e menopausa, além de orientações sobre violência contra a mulher.
+O aplicativo tem como objetivo apoiar mulheres no autocuidado e na identificação de situações que demandam avaliação médica, funcionando como uma ponte entre o usuário e a Unidade Básica de Saúde (UBS). O conteúdo sobre as notícias aborda temas como corrimento vaginal, cólicas, ciclo menstrual, prevenção e rastreio (Papanicolau e mamografia), climatério e menopausa, além de orientações sobre violência contra a mulher.
 
 Funcionalidades:
 Monitoramento de Ciclo: Um calendário intuitivo para registrar e acompanhar o ciclo menstrual.
