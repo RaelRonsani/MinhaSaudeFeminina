@@ -20,7 +20,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.delay
 
 /**
- * Tela de splash. Mostra ícone + título por 4s e vai para PrimeirosPassosScreen.
+ * Tela de inicio mostra icone e título por 4s e vai para PrimeirosPassosScreen.
  */
 object HomeScreen : Screen {
     @androidx.compose.runtime.Composable

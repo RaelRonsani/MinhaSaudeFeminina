@@ -124,7 +124,7 @@ object LoginScreen : Screen {
 }
 
 /**
- * Campo de texto branco com borda preta arredondada (estilo Figma).
+ * Campo de texto branco com borda preta arredondada.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

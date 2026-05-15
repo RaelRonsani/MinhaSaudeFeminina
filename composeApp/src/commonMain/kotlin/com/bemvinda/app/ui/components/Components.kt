@@ -15,11 +15,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.bemvinda.app.ui.AppColors
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 
 /**
  * Topbar usada em todas as telas internas (após login).
- * - Menu (≡) à esquerda: volta para "Inicial"
- * - Ícone de perfil à direita (opcional): vai para tela Perfil
+ * Menu a esquerda: volta para "Inicial"
+ * Ícone de perfil à direita vai para tela Perfil
  */
 @Composable
 fun AppTopBar(
@@ -29,8 +32,9 @@ fun AppTopBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)
             .background(AppColors.RosaForte)
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .height(70.dp)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.CenterStart
     ) {
@@ -68,7 +72,7 @@ fun AppTopBar(
 }
 
 /**
- * Dialog simples de confirmação (OK / Cancelar).
+ * Dialog de confirmação (OK / Cancelar).
  */
 @Composable
 fun ConfirmDialog(
@@ -91,7 +95,7 @@ fun ConfirmDialog(
 }
 
 /**
- * Dialog de aviso simples (apenas OK).
+ * Dialog de aviso (apenas OK).
  */
 @Composable
 fun AvisoDialog(

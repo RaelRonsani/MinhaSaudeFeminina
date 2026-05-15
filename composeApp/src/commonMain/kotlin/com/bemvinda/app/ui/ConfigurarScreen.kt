@@ -167,7 +167,7 @@ private fun CampoComLapis(
     }
 }
 
-/** "2000-12-31" → "31/12/2000". Retorna a string original se não casar. */
+/** "2000-12-31" → "31/12/2000". Retorna a string original */
 private fun isoParaBR(iso: String): String {
     val partes = iso.split("-")
     if (partes.size != 3) return iso

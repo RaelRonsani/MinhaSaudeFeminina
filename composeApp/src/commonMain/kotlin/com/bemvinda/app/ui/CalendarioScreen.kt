@@ -32,6 +32,7 @@ import com.bemvinda.app.ui.components.AvisoDialog
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 
+
 object CalendarioScreen : Screen {
     @Composable
     override fun Content() {

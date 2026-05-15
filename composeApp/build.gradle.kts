@@ -16,7 +16,7 @@ kotlin {
     }
 
     listOf(
-        iosX64(),              // <-- ajuste: incluir Mac Intel também
+        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -30,7 +30,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
-            implementation(libs.ktor.client.android) // <-- ajuste: movido para cá
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -51,7 +51,7 @@ kotlin {
             implementation(compose.materialIconsExtended)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.test) // <-- ajuste: removida a linha de ktor
+            implementation(libs.kotlin.test)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
