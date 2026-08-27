@@ -1,0 +1,13 @@
+{
+    "name": "bemvinda/gestao-artigos",
+    "description": "Interface web de gestão de artigos do app Bem-vinda",
+    "type": "project",
+    "require": {
+        "php": ">=8.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    }
+}
