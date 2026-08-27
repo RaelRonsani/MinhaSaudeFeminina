@@ -1,0 +1,56 @@
+-- ============================================================================
+-- Schema do banco local SQLite (SQLDelight)
+-- Path: composeApp/src/commonMain/sqldelight/com/bemvinda/app/db/Ciclos.sq
+-- ============================================================================
+
+CREATE TABLE ciclos (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    email_usuario   TEXT NOT NULL,
+    data_inicio     TEXT NOT NULL,          -- ISO yyyy-MM-dd
+    data_fim        TEXT NOT NULL,          -- ISO yyyy-MM-dd
+    fluxo           TEXT,                   -- LEVE / MODERADO / INTENSO (opcional)
+    colicas         INTEGER,                -- 0..5 escala (opcional)
+    observacoes     TEXT                    -- texto livre (opcional)
+);
+
+CREATE INDEX idx_ciclos_usuario ON ciclos(email_usuario);
+CREATE INDEX idx_ciclos_data    ON ciclos(data_inicio);
+
+
+-- ============================================================================
+-- QUERIES
+-- ============================================================================
+
+inserir:
+INSERT INTO ciclos (email_usuario, data_inicio, data_fim, fluxo, colicas, observacoes)
+VALUES (?, ?, ?, ?, ?, ?);
+
+listarPorUsuario:
+SELECT * FROM ciclos
+WHERE email_usuario = ?
+ORDER BY data_inicio DESC;
+
+buscarPorId:
+SELECT * FROM ciclos WHERE id = ?;
+
+buscarSobreposto:
+-- Busca ciclos do mesmo usuário que se sobrepõem com o range dado.
+-- Regra de sobreposição: (inicio_A <= fim_B) AND (fim_A >= inicio_B)
+SELECT * FROM ciclos
+WHERE email_usuario = ?
+  AND data_inicio <= ?
+  AND data_fim    >= ?;
+
+atualizar:
+UPDATE ciclos
+SET data_inicio = ?, data_fim = ?, fluxo = ?, colicas = ?, observacoes = ?
+WHERE id = ?;
+
+deletar:
+DELETE FROM ciclos WHERE id = ?;
+
+deletarTodosDoUsuario:
+DELETE FROM ciclos WHERE email_usuario = ?;
+
+contarDoUsuario:
+SELECT COUNT(*) FROM ciclos WHERE email_usuario = ?;

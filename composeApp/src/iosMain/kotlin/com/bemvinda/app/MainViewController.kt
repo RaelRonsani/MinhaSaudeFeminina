@@ -8,3 +8,14 @@ import platform.UIKit.UIViewController
  * UIViewController que renderiza a UI Compose Multiplatform.
  */
 fun MainViewController(): UIViewController = ComposeUIViewController { App() }
+
+/**
+ * Chamada pelo Swift (iOSApp.swift) para obter o UIViewController que
+ * renderiza a UI Compose Multiplatform.
+ *
+ * Inicializa o banco local ANTES de retornar o VC.
+ */
+fun MainViewController(): UIViewController {
+    Banco.inicializar(DriverFactory())
+    return ComposeUIViewController { App() }
+}
