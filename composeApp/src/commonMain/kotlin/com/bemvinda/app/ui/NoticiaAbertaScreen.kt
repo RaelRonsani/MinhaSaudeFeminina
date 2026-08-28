@@ -2,9 +2,7 @@ package com.bemvinda.app.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -54,24 +52,22 @@ data class NoticiaAbertaScreen(val noticiaId: Long) : Screen {
                     .fillMaxSize()
                     .padding(16.dp)
                     .background(AppColors.RosaCardBg, RoundedCornerShape(12.dp))
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
             ) {
+                // Título fica em Compose (fora do WebView) pra manter consistência visual
                 Text(
                     n.titulo,
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().padding(16.dp)
                 )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    n.conteudo,
-                    fontSize = 16.sp,
-                    color = Color.Black
+
+                // Conteúdo HTML renderizado por WebView nativo
+                VisorHtml(
+                    html = n.conteudo,
+                    modifier = Modifier.weight(1f).fillMaxWidth()
                 )
-                Spacer(Modifier.height(24.dp))
             }
         }
     }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,17 +26,29 @@ import com.bemvinda.app.data.NewsRepository
 import com.bemvinda.app.model.CategoriaNoticia
 import com.bemvinda.app.model.Noticia
 import com.bemvinda.app.ui.components.AppTopBar
+import kotlinx.coroutines.launch
 
 object NoticiasScreen : Screen {
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val scope = rememberCoroutineScope()
         val categoriasSelecionadas = remember { mutableStateListOf<String>() }
         var noticias by remember { mutableStateOf<List<Noticia>>(emptyList()) }
         var mostrarFiltros by remember { mutableStateOf(false) }
+        var carregando by remember { mutableStateOf(false) }
 
-        LaunchedEffect(categoriasSelecionadas.toList()) {
+        // Função de recarregar reusada pelo primeiro load e pelo pull-to-refresh
+        suspend fun recarregar() {
+            carregando = true
             noticias = NewsRepository.listar(categoriasSelecionadas.toList())
+            carregando = false
+        }
+
+        // Recarrega quando o filtro muda
+        LaunchedEffect(categoriasSelecionadas.toList()) {
+            recarregar()
         }
 
         Column(
@@ -104,17 +117,40 @@ object NoticiasScreen : Screen {
 
             Spacer(Modifier.height(8.dp))
 
-            // Lista de notícias
-            LazyColumn(
+            // Lista com pull-to-refresh
+            PullToRefreshBox(
+                isRefreshing = carregando,
+                onRefresh = { scope.launch { recarregar() } },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
-                    .background(AppColors.CinzaListBg, RoundedCornerShape(8.dp))
-                    .padding(8.dp)
             ) {
-                items(noticias) { n ->
-                    CardNoticia(n) {
-                        navigator.push(NoticiaAbertaScreen(n.id ?: -1))
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(AppColors.CinzaListBg, RoundedCornerShape(8.dp))
+                        .padding(8.dp)
+                ) {
+                    if (noticias.isEmpty() && !carregando) {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(32.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    "Nenhuma notícia. Arraste pra baixo para atualizar.",
+                                    color = Color.DarkGray,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                    items(noticias) { n ->
+                        CardNoticia(n) {
+                            navigator.push(NoticiaAbertaScreen(n.id ?: -1))
+                        }
                     }
                 }
             }
@@ -132,7 +168,6 @@ private fun CardNoticia(n: Noticia, onClick: () -> Unit) {
             .background(AppColors.RosaCardBg)
             .clickable { onClick() }
     ) {
-        // Header categoria
         Box(
             modifier = Modifier
                 .fillMaxWidth()
