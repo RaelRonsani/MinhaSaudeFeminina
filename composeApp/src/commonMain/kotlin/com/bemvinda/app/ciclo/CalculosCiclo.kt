@@ -6,18 +6,14 @@ import kotlinx.datetime.daysUntil
 import kotlinx.datetime.plus
 
 /**
- * ============================================================================
- *                  CÁLCULOS DO CICLO MENSTRUAL
- * ============================================================================
- *
+
  * Referências:
  *
- * [1] FEBRASGO — Ciclo menstrual normal apresenta intervalo entre 24 e 38 dias;
+ *  FEBRASGO — Ciclo menstrual normal apresenta intervalo entre 24 e 38 dias;
  *     duração do sangramento de até 8 dias.
- * [2] Manual MSD — Sangramento menstrual normalmente dura de 4 a 8 dias.
- * [3] Fase lútea constante ~14 dias (base do cálculo de ovulação).
- * [4] Janela fértil = 5 dias antes da ovulação + dia da ovulação.
- * ============================================================================
+ *  Manual MSD — Sangramento menstrual normalmente dura de 4 a 8 dias.
+ *  Fase lútea constante ~14 dias (base do cálculo de ovulação).
+ *  Janela fértil = 5 dias antes da ovulação + dia da ovulação.
  */
 object CalculosCiclo {
 

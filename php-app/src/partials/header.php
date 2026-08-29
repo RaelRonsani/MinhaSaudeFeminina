@@ -1,6 +1,6 @@
 <?php
 $usuario = Auth::usuarioLogado();
-$titulo = $titulo ?? 'Gestão de Artigos - Bem-vinda';
+$titulo = $titulo ?? 'Gestão de Artigos - Minha Saúde Feminina';
 ?><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,7 +28,7 @@ $titulo = $titulo ?? 'Gestão de Artigos - Bem-vinda';
 <body>
 <nav class="navbar navbar-expand-lg mb-4">
     <div class="container">
-        <a class="navbar-brand" href="/index.php">♀ Bem-vinda — Gestão</a>
+        <a class="navbar-brand" href="/index.php">Minha Saude Femina — Gestão</a>
         <?php if ($usuario): ?>
             <div class="d-flex align-items-center">
                 <span class="me-3 fw-bold"><?= e($usuario['nome']) ?></span>
